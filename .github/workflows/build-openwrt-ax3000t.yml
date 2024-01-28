@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt
+name: Build OpenWrt - Xiaomi Router AX3000T
 
 on:
   repository_dispatch:
@@ -23,14 +23,14 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: .config
+  CONFIG_FILE: ax3000t.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: false
-  UPLOAD_RELEASE: false
+  UPLOAD_WETRANSFER: true
+  UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -173,7 +173,19 @@ jobs:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
-
+        
+    - name: Bark-Push
+      uses: harryzcy/action-bark@v2.0.2
+      with:
+          status: ${{ job.status }}
+          # on_status: failure, cancelled # only run on these status
+          title: AutoBuild-OpenWrt
+          body: $(date +"%Y.%m.%d-%H%M")_AX3000T编译结束：${{ steps.wetransfer.outputs.url }}
+          device_key: ${{ secrets.BARK_DEVICE_KEY }}
+          level: passive # iOS notification level 'active', 'timeSensitive' or 'passive', default to 'active'
+          bark_server_url: ${{ secrets.BARK_SERVER_URL }}
+      if: always() # Pick up events even if the job fails or is canceled.
+      
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
