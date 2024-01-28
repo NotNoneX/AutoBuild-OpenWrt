@@ -15,6 +15,7 @@ sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generat
 
 # --------------- 自定义部分 ---------------
 # 修改默认主题
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 WRT_THEME=argon
 sed -i "s/luci-theme-bootstrap/luci-theme-$WRT_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
 ## 配置文件修改 或手动添加
