@@ -15,7 +15,7 @@ sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generat
 
 # --------------- 自定义部分 ---------------
 # 修改默认主题
-$WRT_THEME=argon
+WRT_THEME=argon
 sed -i "s/luci-theme-bootstrap/luci-theme-$WRT_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
 ## 配置文件修改 或手动添加
 #echo "CONFIG_PACKAGE_luci-theme-$WRT_THEME=y" >> ./.config
