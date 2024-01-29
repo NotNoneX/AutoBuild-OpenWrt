@@ -15,15 +15,13 @@ sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generat
 
 # --------------- 自定义部分 ---------------
 # 修改默认主题
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
-WRT_THEME=argon
-sed -i "s/luci-theme-bootstrap/luci-theme-$WRT_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
+# WRT_THEME=argon
+# sed -i "s/luci-theme-bootstrap/luci-theme-$WRT_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
 ## 配置文件修改 或手动添加
 #echo "CONFIG_PACKAGE_luci-theme-$WRT_THEME=y" >> ./.config
 #echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
 
 CFG_FILE="./package/base-files/files/bin/config_generate"
-
 # 修改默认主机名
 sed -i "s/hostname='.*'/hostname='OpenWrt'/g" $CFG_FILE
 # 修改默认时区
