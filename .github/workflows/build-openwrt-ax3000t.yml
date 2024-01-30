@@ -161,7 +161,7 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer fic -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee onefichier.log
-        echo "::warning file=onefichier.com::$(cat onefichier.log | grep https)"
+        echo "::warning file=1fichier.com::$(cat onefichier.log | grep https)"
         echo "url=$(cat onefichier.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
