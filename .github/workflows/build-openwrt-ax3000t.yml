@@ -30,6 +30,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
+  UPLOAD_ONEFICHIER: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -154,6 +155,15 @@ jobs:
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
         echo "url=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
+    - name: Upload firmware to 1Fichier
+      id: 1fichier
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_ONEFICHIER == 'true' && !cancelled()
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer fic -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee 1fichier.log
+        echo "::warning file=1fichier.com::$(cat 1fichier.log | grep https)"
+        echo "url=$(cat 1fichier.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
+
     - name: Generate release tag
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
@@ -162,6 +172,7 @@ jobs:
         touch release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+        [ $UPLOAD_ONEFICHIER = true ] && echo "🔗 [ONEFICHIER](${{ steps.wetransfer.1fichier.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
@@ -180,7 +191,7 @@ jobs:
           status: ${{ job.status }}
           # on_status: failure, cancelled # only run on these status
           title: AutoBuild-OpenWrt
-          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${{ steps.wetransfer.outputs.url }}"
+          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${{ steps.1fichier.outputs.url }}"
           device_key: ${{ secrets.BARK_DEVICE_KEY }}
           level: passive # iOS notification level 'active', 'timeSensitive' or 'passive', default to 'active'
           bark_server_url: ${{ secrets.BARK_SERVER_URL }}
