@@ -161,7 +161,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_ONEFICHIER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer fic -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee onefichier.log
+        ./transfer fic -p 16 --no-progress ${FIRMWARE} 2>&1 | tee onefichier.log
         echo "::warning file=1fichier.com::$(cat onefichier.log | grep https)"
         echo "url=$(cat onefichier.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
@@ -170,7 +170,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_DOWNLOADGG == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer gg -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee downloadgg.log
+        ./transfer gg -p 16 --no-progress ${FIRMWARE} 2>&1 | tee downloadgg.log
         echo "::warning file=download.gg::$(cat wetransfer.log | grep https)"
         echo "url=$(cat downloadgg.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
