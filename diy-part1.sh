@@ -17,6 +17,12 @@
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 
+
+# 删除自定义源默认的 argon 主题
+rm -rf package/lean/luci-theme-argon
+# 部分第三方源自带 argon 主题，上面命令删除不掉的请运行下面命令
+# find ./ -name luci-theme-argon | xargs rm -rf;
+
 # 修改默认主题
 # 针对 LEDE 项目拉取 argon 原作者的源码
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
