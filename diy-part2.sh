@@ -14,11 +14,6 @@
 sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
 
 # --------------- 自定义部分 ---------------
-# 删除自定义源默认的 argon 主题
-rm -rf package/lean/luci-theme-argon
-# 部分第三方源自带 argon 主题，上面命令删除不掉的请运行下面命令
-# find ./ -name luci-theme-argon | xargs rm -rf;
-
 
 CFG_FILE="./package/base-files/files/bin/config_generate"
 # 修改默认主机名
