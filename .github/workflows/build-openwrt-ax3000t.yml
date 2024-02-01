@@ -163,7 +163,7 @@ jobs:
         FILE_NAME=Einstar${FILE_DATE}${DEVICE_NAME}.tar.gz
         tar -zcvf ${FILE_NAME} -C ${FIRMWARE} .
         curl -fsSL git.io/file-transfer | sh
-        ./transfer fic -p 16 --no-progress ${FILE_NAME} 2>&1 | tee onefichier.log
+        ./transfer fic --no-progress ${FILE_NAME} 2>&1 | tee onefichier.log
         echo "::warning file=1fichier.com::$(cat onefichier.log | grep https)"
         echo "url=$(cat onefichier.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
@@ -212,7 +212,7 @@ jobs:
           status: ${{ job.status }}
           # on_status: failure, cancelled # only run on these status
           title: AutoBuild-OpenWrt
-          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${PUSH_MSG}"
+          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：$PUSH_MSG"
           device_key: ${{ secrets.BARK_DEVICE_KEY }}
           level: passive # iOS notification level 'active', 'timeSensitive' or 'passive', default to 'active'
           bark_server_url: ${{ secrets.BARK_SERVER_URL }}
