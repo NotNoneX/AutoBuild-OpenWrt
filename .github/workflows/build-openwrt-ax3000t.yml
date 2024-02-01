@@ -30,7 +30,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
-  UPLOAD_ONEFICHIER: false
+  UPLOAD_ONEFICHIER: true
   UPLOAD_DOWNLOADGG: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -160,8 +160,10 @@ jobs:
       id: onefichier
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_ONEFICHIER == 'true' && !cancelled()
       run: |
+        FILE_NAME=Einstar${FILE_DATE}${DEVICE_NAME}.tar.gz
+        tar -zcvf ${FILE_NAME} -C ${FIRMWARE} .
         curl -fsSL git.io/file-transfer | sh
-        ./transfer fic -p 16 --no-progress ${FIRMWARE} 2>&1 | tee onefichier.log
+        ./transfer fic -p 16 --no-progress ${FILE_NAME} 2>&1 | tee onefichier.log
         echo "::warning file=1fichier.com::$(cat onefichier.log | grep https)"
         echo "url=$(cat onefichier.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
@@ -170,7 +172,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_DOWNLOADGG == 'true' && !cancelled()
       run: |
         FILE_NAME=Einstar${FILE_DATE}${DEVICE_NAME}.tar.gz
-        tar -zcvf ${FILE_NAME} ${FIRMWARE}
+        tar -zcvf ${FILE_NAME} -C ${FIRMWARE} .
         curl -fsSL git.io/file-transfer | sh
         ./transfer gg --no-progress ${FILE_NAME} 2>&1 | tee downloadgg.log
         echo "::warning file=download.gg::$(cat downloadgg.log | grep https)"
