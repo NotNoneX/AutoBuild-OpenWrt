@@ -169,9 +169,11 @@ jobs:
       id: downloadgg
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_DOWNLOADGG == 'true' && !cancelled()
       run: |
+        FILE_NAME=Einstar${FILE_DATE}${DEVICE_NAME}.tar.gz
+        tar -zcvf ${FILE_NAME} ${FIRMWARE}
         curl -fsSL git.io/file-transfer | sh
-        ./transfer gg -p 16 --no-progress ${FIRMWARE} 2>&1 | tee downloadgg.log
-        echo "::warning file=download.gg::$(cat wetransfer.log | grep https)"
+        ./transfer gg --no-progress ${FILE_NAME} 2>&1 | tee downloadgg.log
+        echo "::warning file=download.gg::$(cat downloadgg.log | grep https)"
         echo "url=$(cat downloadgg.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
