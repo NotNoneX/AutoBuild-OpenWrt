@@ -190,7 +190,7 @@ jobs:
         [ $UPLOAD_DOWNLOADGG = true ] && echo "🔗 [DownloadGG](${{ steps.downloadgg.outputs.url }})" >> release.txt
         touch push_info.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "Cowtransfer：${{ steps.cowtransfer.outputs.url }}" >> push_info.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "WeTransfe：r${{ steps.wetransfer.outputs.url }}" >> push_info.txt
+        [ $UPLOAD_WETRANSFER = true ] && echo "WeTransfer：${{ steps.wetransfer.outputs.url }}" >> push_info.txt
         [ $UPLOAD_ONEFICHIER = true ] && echo "1Fichier：${{ steps.onefichier.outputs.url }}" >> push_info.txt
         [ $UPLOAD_DOWNLOADGG = true ] && echo "DownloadGG：${{ steps.downloadgg.outputs.url }}" >> push_info.txt
         PUSH_MSG=$(cat push_info.txt)
