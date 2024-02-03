@@ -214,7 +214,7 @@ jobs:
           status: ${{ job.status }}
           # on_status: failure, cancelled # only run on these status
           title: AutoBuild-OpenWrt
-          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${{ steps.tag.outputs }}"
+          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${{ toJson(steps.tag.outputs) }}"
           device_key: ${{ secrets.BARK_DEVICE_KEY }}
           level: passive # iOS notification level 'active', 'timeSensitive' or 'passive', default to 'active'
           bark_server_url: ${{ secrets.BARK_SERVER_URL }}
