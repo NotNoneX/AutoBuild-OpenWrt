@@ -184,19 +184,18 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
-        echo "**WIFI名：**Einstar" >> release.txt
-        echo "**后台地址：**192.168.1.2" >> release.txt
-        echo "**默认管理用户：**root" >> release.txt
-        echo "**默认管理密码：**password" >> release.txt
+        echo "**WIFI名：** Einstar" >> release.txt
+        echo "**后台地址：** 192.168.1.2" >> release.txt
+        echo "**默认管理用户：** root" >> release.txt
+        echo "**默认管理密码：** password" >> release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_ONEFICHIER = true ] && echo "🔗 [1Fichier](${{ steps.onefichier.outputs.url }})" >> release.txt
         [ $UPLOAD_DOWNLOADGG = true ] && echo "🔗 [DownloadGG](${{ steps.downloadgg.outputs.url }})" >> release.txt
-        touch push_info.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "Cowtransfer：${{ steps.cowtransfer.outputs.url }}" >> push_info.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "WeTransfer：${{ steps.wetransfer.outputs.url }}" >> push_info.txt
-        [ $UPLOAD_ONEFICHIER = true ] && echo "1Fichier：${{ steps.onefichier.outputs.url }}" >> push_info.txt
-        [ $UPLOAD_DOWNLOADGG = true ] && echo "DownloadGG：${{ steps.downloadgg.outputs.url }}" >> push_info.txt
+        [ $UPLOAD_COWTRANSFER = true ] && echo "Cowtransfer=${{ steps.cowtransfer.outputs.url }}" >> $GITHUB_OUTPUT
+        [ $UPLOAD_WETRANSFER = true ] && echo "WeTransfer=${{ steps.wetransfer.outputs.url }}" >> $GITHUB_OUTPUT
+        [ $UPLOAD_ONEFICHIER = true ] && echo "OneFichier=${{ steps.onefichier.outputs.url }}" >> $GITHUB_OUTPUT
+        [ $UPLOAD_DOWNLOADGG = true ] && echo "DownloadGG=${{ steps.downloadgg.outputs.url }}" >> $GITHUB_OUTPUT
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
@@ -215,7 +214,7 @@ jobs:
           status: ${{ job.status }}
           # on_status: failure, cancelled # only run on these status
           title: AutoBuild-OpenWrt
-          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：$(cat push_info.txt)"
+          body: "${{ steps.tag.outputs.release_tag }}_AX3000T编译结束：${{ steps.tag.outputs }}"
           device_key: ${{ secrets.BARK_DEVICE_KEY }}
           level: passive # iOS notification level 'active', 'timeSensitive' or 'passive', default to 'active'
           bark_server_url: ${{ secrets.BARK_SERVER_URL }}
