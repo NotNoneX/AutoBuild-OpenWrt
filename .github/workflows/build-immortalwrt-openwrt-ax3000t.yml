@@ -184,6 +184,8 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
+        echo "**源码：** ${{ env.REPO_URL }}" >> release.txt
+        echo  "**分支：** ${{ env.REPO_BRANCH }}" >> release.txt
         echo "**WIFI名：** Einstar" >> release.txt
         echo "**后台地址：** 192.168.1.2" >> release.txt
         echo "**默认管理用户：** root" >> release.txt
