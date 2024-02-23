@@ -193,7 +193,7 @@ jobs:
         echo "**WIFI名：** Einstar" >> release.txt
         echo "**后台地址：** 192.168.1.2" >> release.txt
         echo "**默认管理用户：** root" >> release.txt
-        echo "**默认管理密码：** password" >> release.txt
+        echo "**默认管理密码：** 无" >> release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_ONEFICHIER = true ] && echo "🔗 [1Fichier](${{ steps.onefichier.outputs.url }})" >> release.txt
