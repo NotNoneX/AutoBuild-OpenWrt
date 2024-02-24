@@ -182,7 +182,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
+        echo "release_tag=Lede_$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         echo "**源码：** ${{ env.REPO_URL }}" >> release.txt
         echo  "**分支：** ${{ env.REPO_BRANCH }}" >> release.txt
