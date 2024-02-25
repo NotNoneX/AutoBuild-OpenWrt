@@ -17,9 +17,9 @@ env:
 
 on:
   workflow_dispatch:
-  # UTC时间 每周五早上3点检查一次更新 +8小时为中国时间
+  # UTC时间 每天早上3点检查一次更新 +8小时为中国时间
   schedule:
-   - cron: 0 3 * * 5
+   - cron: 0 3 * * *
 
 jobs:
   check:
