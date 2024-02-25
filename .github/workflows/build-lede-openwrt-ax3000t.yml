@@ -12,6 +12,7 @@ name: Lede - Xiaomi Router AX3000T
 
 on:
   repository_dispatch:
+    types: [Lede Source Code Update]
   workflow_dispatch:
     inputs:
       ssh:
