@@ -11,6 +11,10 @@
 name: Lede - Xiaomi Router AX3000T
 
 on:
+  #自动编译：每天早上4点
+  # schedule:
+  #   - cron: 0 20 * * *
+  #手动编译 并且监听事件：[Lede Source Code Update]
   repository_dispatch:
     types: [Lede Source Code Update]
   workflow_dispatch:
