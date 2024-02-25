@@ -28,6 +28,9 @@ sed -i "s/ssid=.*/ssid=Einstar/g" ./package/kernel/mac80211/files/lib/wifi/mac80
 # ddns-go软件
 # git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 
+# pushbot插件
+git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
+
 # 删除自定义源默认的 argon 主题
 # rm -rf package/lean/luci-theme-argon
 # 部分第三方源自带 argon 主题，上面命令删除不掉的请运行下面命令
