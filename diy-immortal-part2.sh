@@ -39,7 +39,9 @@ sed -i "s/ssid=.*/ssid=Einstar/g" ./package/kernel/mac80211/files/lib/wifi/mac80
 # git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 
 # lucky
-git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+# git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+
 
 # tailscale
 git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
