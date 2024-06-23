@@ -41,6 +41,9 @@ sed -i "s/ssid=.*/ssid=Einstar/g" ./package/kernel/mac80211/files/lib/wifi/mac80
 # lucky
 git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 
+# tailscale
+git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
+
 # pushbot插件 无法启动 先注释
 # git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
 
