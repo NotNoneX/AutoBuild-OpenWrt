@@ -38,6 +38,9 @@ sed -i "s/ssid=.*/ssid=Einstar/g" ./package/kernel/mac80211/files/lib/wifi/mac80
 # ddns-go软件 immortal自带 故注释
 # git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 
+# lucky
+git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+
 # pushbot插件 无法启动 先注释
 # git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
 
