@@ -48,6 +48,8 @@ git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
 
 # iStore插件
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
+./scripts/feeds update istore
+./scripts/feeds install -d y -p istore luci-app-store
 
 # pushbot插件 无法启动 先注释
 # git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
