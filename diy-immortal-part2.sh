@@ -43,8 +43,8 @@ sed -i "s/ssid=.*/ssid=Einstar/g" ./package/kernel/mac80211/files/lib/wifi/mac80
 # git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 
 
-# tailscale
-git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
+# tailscale 直接用iStore安装
+# git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
 
 # iStore插件
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
